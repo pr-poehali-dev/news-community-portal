@@ -1,4 +1,3 @@
-
 import React from "react";
 import PopularNews from "@/components/home/PopularNews";
 import NewsListing from "@/components/home/NewsListing";
@@ -32,7 +31,7 @@ interface MainContentProps {
 }
 
 /**
- * Компонент основного содержимого главной страницы, разделенного на три колонки
+ * Компонент основного содержимого главной страницы с фокусом на новостную ленту по центру
  */
 const MainContent: React.FC<MainContentProps> = ({ news, comments }) => {
   return (
@@ -40,19 +39,23 @@ const MainContent: React.FC<MainContentProps> = ({ news, comments }) => {
       <div className="container px-4 max-w-screen-xl">
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Левая колонка - Популярное */}
-          <div className="lg:w-1/4">
-            <PopularNews news={news} />
+          <div className="w-full lg:w-1/4 order-2 lg:order-1">
+            <div className="lg:sticky lg:top-20 space-y-8">
+              <PopularNews news={news} />
+              <LatestComments comments={comments} />
+            </div>
           </div>
 
-          {/* Центральная колонка - Новости */}
-          <div className="lg:w-2/4">
+          {/* Центральная колонка - Новости с комментариями */}
+          <div className="w-full lg:w-2/4 order-1 lg:order-2">
             <NewsListing news={news} />
           </div>
 
-          {/* Правая колонка - Комментарии и форма */}
-          <div className="lg:w-1/4 space-y-8">
-            <LatestComments comments={comments} />
-            <SubmitNewsForm />
+          {/* Правая колонка - Форма предложения новости */}
+          <div className="w-full lg:w-1/4 order-3">
+            <div className="lg:sticky lg:top-20">
+              <SubmitNewsForm />
+            </div>
           </div>
         </div>
       </div>
