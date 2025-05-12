@@ -1,4 +1,3 @@
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
@@ -22,7 +21,7 @@ interface LatestCommentsProps {
 
 const LatestComments = ({ comments }: LatestCommentsProps) => {
   return (
-    <Card>
+    <Card className="border-primary/20 shadow-md">
       <CardHeader className="pb-3">
         <CardTitle className="text-xl flex items-center gap-2">
           <Icon name="MessageSquare" className="h-5 w-5 text-primary" />
@@ -41,19 +40,27 @@ const LatestComments = ({ comments }: LatestCommentsProps) => {
             <div className="space-y-1 flex-1">
               <div className="flex items-center text-sm">
                 <span className="font-medium">{comment.author.name}</span>
-                <Icon name="ChevronRight" className="h-4 w-4 mx-1 text-muted-foreground" />
-                <Link 
-                  to={`/news/${comment.newsId}`} 
+                <Icon
+                  name="ChevronRight"
+                  className="h-4 w-4 mx-1 text-muted-foreground"
+                />
+                <Link
+                  to={`/news/${comment.newsId}`}
                   className="text-muted-foreground hover:text-primary line-clamp-1 flex-1"
                 >
                   {comment.newsTitle}
                 </Link>
               </div>
-              <p className="text-sm text-muted-foreground line-clamp-2">{comment.content}</p>
+              <p className="text-sm text-muted-foreground line-clamp-2">
+                {comment.content}
+              </p>
               <div className="flex items-center text-xs text-muted-foreground">
                 <span>{comment.createdAt}</span>
                 <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
-                  <button className="text-muted-foreground hover:text-primary" aria-label="Like">
+                  <button
+                    className="text-muted-foreground hover:text-primary"
+                    aria-label="Like"
+                  >
                     <Icon name="ThumbsUp" className="h-3.5 w-3.5" />
                   </button>
                 </div>
@@ -61,8 +68,8 @@ const LatestComments = ({ comments }: LatestCommentsProps) => {
             </div>
           </div>
         ))}
-        <Link 
-          to="/comments" 
+        <Link
+          to="/comments"
           className="text-sm text-primary hover:text-primary/80 flex items-center justify-center mt-2"
         >
           Все комментарии

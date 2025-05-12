@@ -1,4 +1,3 @@
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -24,14 +23,23 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import Icon from "@/components/ui/icon";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const formSchema = z.object({
-  title: z.string().min(5, {
-    message: "Заголовок должен содержать не менее 5 символов",
-  }).max(100, {
-    message: "Заголовок должен содержать не более 100 символов",
-  }),
+  title: z
+    .string()
+    .min(5, {
+      message: "Заголовок должен содержать не менее 5 символов",
+    })
+    .max(100, {
+      message: "Заголовок должен содержать не более 100 символов",
+    }),
   category: z.string({
     required_error: "Пожалуйста, выберите категорию",
   }),
@@ -70,15 +78,16 @@ const SubmitNewsForm = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     toast({
       title: "Новость отправлена на модерацию",
-      description: "Спасибо за вашу новость! Мы рассмотрим её в ближайшее время.",
+      description:
+        "Спасибо за вашу новость! Мы рассмотрим её в ближайшее время.",
     });
-    
+
     console.log(values);
     form.reset();
   }
 
   return (
-    <Card>
+    <Card className="border-primary/20 shadow-md">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-xl">
           <Icon name="PenLine" className="h-5 w-5 text-primary" />
@@ -98,22 +107,29 @@ const SubmitNewsForm = () => {
                 <FormItem>
                   <FormLabel>Заголовок</FormLabel>
                   <FormControl>
-                    <Input placeholder="Введите заголовок новости" {...field} />
+                    <Input
+                      placeholder="Введите заголовок новости"
+                      {...field}
+                      className="bg-muted/50 border-border/30"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="category"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Категория</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger className="bg-muted/50 border-border/30">
                         <SelectValue placeholder="Выберите категорию" />
                       </SelectTrigger>
                     </FormControl>
@@ -129,7 +145,7 @@ const SubmitNewsForm = () => {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="content"
@@ -139,7 +155,7 @@ const SubmitNewsForm = () => {
                   <FormControl>
                     <Textarea
                       placeholder="Опишите новость подробно"
-                      className="min-h-[100px]"
+                      className="min-h-[100px] bg-muted/50 border-border/30"
                       {...field}
                     />
                   </FormControl>
@@ -147,7 +163,7 @@ const SubmitNewsForm = () => {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="source"
@@ -155,16 +171,20 @@ const SubmitNewsForm = () => {
                 <FormItem>
                   <FormLabel>Источник (если есть)</FormLabel>
                   <FormControl>
-                    <Input placeholder="Укажите источник информации" {...field} />
+                    <Input
+                      placeholder="Укажите источник информации"
+                      {...field}
+                      className="bg-muted/50 border-border/30"
+                    />
                   </FormControl>
-                  <FormDescription>
+                  <FormDescription className="text-muted-foreground">
                     Ссылка на оригинальную статью или иной источник
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="email"
@@ -172,16 +192,20 @@ const SubmitNewsForm = () => {
                 <FormItem>
                   <FormLabel>Ваш email</FormLabel>
                   <FormControl>
-                    <Input placeholder="email@example.com" {...field} />
+                    <Input
+                      placeholder="email@example.com"
+                      {...field}
+                      className="bg-muted/50 border-border/30"
+                    />
                   </FormControl>
-                  <FormDescription>
+                  <FormDescription className="text-muted-foreground">
                     Мы свяжемся с вами, если новость будет опубликована
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            
+
             <CardFooter className="px-0">
               <Button type="submit" className="w-full">
                 <Icon name="Send" className="mr-2 h-4 w-4" />
